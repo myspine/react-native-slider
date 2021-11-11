@@ -11,6 +11,9 @@ import {
     View,
     ViewStyle,
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+
+const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient)
 // styles
 import {defaultStyles as styles} from './styles';
 import type {Dimensions, SliderProps, SliderState} from './types';
@@ -728,9 +731,10 @@ export class Slider extends PureComponent<SliderProps, SliderState> {
                         ]}
                         onLayout={this._measureTrack}
                     />
-                    <Animated.View
-                        renderToHardwareTextureAndroid
+
+                    <AnimatedLinearGradient
                         style={[styles.track, trackStyle, minimumTrackStyle]}
+                        colors={['#14D176', '#F3CA40', '#F4743B', '#FF4242']} useAngle={true} angle={90}
                     />
                     {renderTrackMarkComponent &&
                         interpolatedTrackMarksValues &&
@@ -750,6 +754,7 @@ export class Slider extends PureComponent<SliderProps, SliderState> {
                                         ],
                                         ...valueVisibleStyle,
                                     },
+                                    
                                 ]}>
                                 {renderTrackMarkComponent(i)}
                             </Animated.View>
